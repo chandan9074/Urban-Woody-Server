@@ -21,6 +21,7 @@ async function run() {
 
     const database = client.db("urbanWoody");
     const productCollection = database.collection("products");
+    const ordersCollection = database.collection("orders");
 
     // // get api
     app.get("/product", async (req, res)=>{
@@ -36,21 +37,29 @@ async function run() {
     })
     
     // // single service get 
-    // app.get("/services/:id", async (req, res)=>{
+    app.get("/product/:id", async (req, res)=>{
 
-    //     const id = req.params.id;
-    //     const query = {_id: ObjectId(id)}
+        const id = req.params.id;
+        const query = {_id: ObjectId(id)}
 
-    //     const result = await serviceCollection.findOne(query);
-    //     // console.log(result)
-    //     res.json(result)
-    //     // console.log(req.body)
-    // })
+        const result = await productCollection.findOne(query);
+        // console.log(result)
+        res.json(result)
+        // console.log(req.body)
+    })
 
     // //post api
     app.post("/product", async (req, res)=>{
         const product = req.body;
         const result = await productCollection.insertOne(product);
+        // console.log(product)
+        res.json(result)
+        // console.log(req.body)
+    })
+
+    app.post("/orders", async (req, res)=>{
+        const product = req.body;
+        const result = await ordersCollection.insertOne(product);
         // console.log(product)
         res.json(result)
         // console.log(req.body)

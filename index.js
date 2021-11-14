@@ -173,9 +173,6 @@ async function run() {
             // res.json({ admin: isAdmin });
             res.json(user);
         });
-    
-
-
   }
   finally{
     // await client.close();

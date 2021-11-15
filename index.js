@@ -17,7 +17,6 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
   try {
     await client.connect();
-    // console.log("hello man")
 
     const database = client.db("urbanWoody");
     const productCollection = database.collection("products");
@@ -28,40 +27,25 @@ async function run() {
     // // get api
     app.get("/product", async (req, res)=>{
 
-        // const query = { runtime: { $lt: 15 } };
-
         const cursor = productCollection.find({});
         const services = await cursor.toArray();
-        // const result = await serviceCollection.insertOne(service);
-        // console.log(result)
         res.send(services)
-        // console.log(req.body)
     })
 
     // // get api
     app.get("/review", async (req, res)=>{
 
-        // const query = { runtime: { $lt: 15 } };
-
         const cursor = reviewCollection.find({});
         const services = await cursor.toArray();
-        // const result = await serviceCollection.insertOne(service);
-        // console.log(result)
         res.send(services)
-        // console.log(req.body)
     })
 
     // // get api
     app.get("/orders", async (req, res)=>{
 
-        // const query = { runtime: { $lt: 15 } };
-
         const cursor = ordersCollection.find({});
         const services = await cursor.toArray();
-        // const result = await serviceCollection.insertOne(service);
-        // console.log(result)
         res.send(services)
-        // console.log(req.body)
     })
     
     // // single service get 
@@ -71,34 +55,26 @@ async function run() {
         const query = {_id: ObjectId(id)}
 
         const result = await productCollection.findOne(query);
-        // console.log(result)
         res.json(result)
-        // console.log(req.body)
     })
 
     // //post api
     app.post("/product", async (req, res)=>{
         const product = req.body;
         const result = await productCollection.insertOne(product);
-        // console.log(product)
         res.json(result)
-        // console.log(req.body)
     })
 
     app.post("/review", async (req, res)=>{
         const product = req.body;
         const result = await reviewCollection.insertOne(product);
-        // console.log(product)
         res.json(result)
-        // console.log(req.body)
     })
 
     app.post("/orders", async (req, res)=>{
         const product = req.body;
         const result = await ordersCollection.insertOne(product);
-        // console.log(product)
         res.json(result)
-        // console.log(req.body)
     })
 
     //delete api
@@ -166,11 +142,6 @@ async function run() {
             const email = req.params.email;
             const query = { email: email };
             const user = await usersCollection.findOne(query);
-            // let isAdmin = false
-            // if (user?.role === 'admin') {
-            //     isAdmin = true;
-            // }
-            // res.json({ admin: isAdmin });
             res.json(user);
         });
   }
